@@ -9,12 +9,19 @@ typedef struct node
   struct node *prev;
 } Node;
 
-void insert(Node **head, Node **tail, int data)
+Node *create_new_node(int data)
 {
   Node *new_node = malloc(sizeof(Node));
   new_node->data = data;
   new_node->next = NULL;
   new_node->prev = NULL;
+  return new_node;
+}
+
+void insert(Node **head, Node **tail, int data)
+{
+  Node *new_node = create_new_node(data);
+
   if (!(*head))
   {
     *head = new_node;
