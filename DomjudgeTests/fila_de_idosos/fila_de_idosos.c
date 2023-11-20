@@ -4,32 +4,32 @@
 
 typedef struct idoso
 {
-  int idade, tempo;
+  int age, time;
   struct idoso *next;
   struct idoso *prev;
-} Idoso;
-
-Idoso *create_node(int idade, int tempo)
+} Node;
+Node *head = NULL, *tail = NULL, *caixa = NULL, *removed = NULL;
+Node *create_node(int age, int time)
 {
-  Idoso *new_node = (Idoso *)malloc(sizeof(Idoso));
-  new_node->idade = idade;
-  new_node->tempo = tempo;
+  Node *new_node = (Node *)malloc(sizeof(Node));
+  new_node->age = age;
+  new_node->time = time;
   new_node->next = NULL;
   new_node->prev = NULL;
   return new_node;
 }
 
-void insert_no_priority(Idoso **head, Idoso **tail, int idade, int tempo)
+void insert_no_priority(Node **head, Node **tail, int age, int time)
 {
-  Idoso *new_node = create_node(idade, tempo);
+  Node *new_node = create_node(age, time);
   if (!(*head))
   {
     *head = new_node;
     *tail = new_node;
     return;
   }
-  Idoso *temp = *tail;
-  while (temp->prev && (temp->tempo < temp->prev->tempo && temp->prev->idade < 60))
+  Node *temp = *tail;
+  while (temp->prev && (temp->time < temp->prev->time && temp->prev->age < 60))
     temp = temp->prev;
   if (temp == *tail)
   {
@@ -45,79 +45,112 @@ void insert_no_priority(Idoso **head, Idoso **tail, int idade, int tempo)
   return;
 }
 
-void insert_with_priority(Idoso **head, Idoso **tail, int idade, int tempo)
+void insert_with_priority(Node **head, Node **tail, int age, int time)
 {
-  Idoso *new_node = create_node(idade, tempo);
+  Node *new_node = create_node(age, time);
   if (!(*head))
   {
     *head = new_node;
     *tail = new_node;
     return;
   }
-  new_node->next = *head;
-  (*head)->prev = new_node;
-  *head = new_node;
+
+  Node *temp = *head;
+
+  while (temp->age >= 60)
+  {
+    if (temp->time < new_node->time)
+    {
+      temp = temp->next;
+      printf("temp age:%d\n", temp->age);
+    }
+  }
+  if (temp == *head)
+  {
+    (*head)->prev = new_node;
+    new_node->next = (*head)->next;
+    *head = new_node;
+    return;
+  }
+  new_node->prev = temp->prev;
+  new_node->next = temp;
+  temp->prev = new_node;
+  temp = new_node;
+  return;
+
   return;
 }
 
-void show(Idoso **head, Idoso **caixa)
+void show(Node **head, int i)
 {
-  if (caixa != NULL)
-  {
-    printf("%d ", (*caixa)->idade);
-  }
-  Idoso *temp = *head;
+  Node *temp = *head;
   if (!temp)
-    return;
-  while (temp)
   {
-    printf("%d ", temp->idade);
-    temp = temp->next;
+    printf("\n");
+    return;
   }
-  printf("\n");
+  for (int j = 0; j < i; j++)
+  {
+    if (temp)
+    {
+      printf("%d ", temp->age);
+      temp = temp->next;
+    }
+  }
   return;
 }
-Idoso *send_to_box(Idoso **head, Idoso **tail, Idoso **caixa)
+
+Node *send_to_box(Node **head, Node **tail, Node **caixa, int N)
 {
-  if (!(*head))
-    return NULL;
-  Idoso *temp = *head;
-  if (!(*caixa))
+  if (N % 3 == 0)
   {
-    *caixa = temp;
-    (*caixa)->next = NULL;
-    (*caixa)->prev = NULL;
-    *head = NULL;
-    return *caixa;
+    Node *temp = *head;
+    if (!(*head)->next)
+    {
+      *caixa = *head;
+      *head = NULL;
+      *tail = NULL;
+      (*caixa)->next = NULL;
+      (*caixa)->prev = NULL;
+      return *caixa;
+    }
+    else if ((*head)->next)
+    {
+      *caixa = *head;
+      *head = (*head)->next;
+      (*caixa)->next = NULL;
+      (*caixa)->prev = NULL;
+      return *caixa;
+    }
   }
-  temp->prev->next = temp->next;
-  temp->next->prev = temp->prev;
-  *caixa = temp;
-  (*caixa)->next = NULL;
   return *caixa;
 }
 
 int main(void)
 {
-  int start, end, n, I, T;
-  double cpu_time_used;
-  Idoso *head = NULL, *tail = NULL, *caixa = NULL, *removed = NULL;
-  start = clock();
-
+  int n, j = 0, I, T, N;
   scanf("%d", &n);
+  N = n * 3;
   for (int i = 0; i < n; i++)
   {
     scanf("%d %d", &I, &T);
-    (I > 59) ? insert_with_priority(&head, &tail, I, T) : insert_no_priority(&head, &tail, I, T);
-    if (i % 3 == 0 || i == 0)
-    {
-      removed = send_to_box(&head, &tail, &caixa);
-    }
-
+    (I > 59) ? insert_with_priority(&head, &tail, I, T)
+             : insert_no_priority(&head, &tail, I, T);
+    if (i == 0)
+      removed = send_to_box(&head, &tail, &caixa, N - i);
   }
-  show(&head, &removed);
-  end = clock();
-  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-  printf("Time: %lf\n", cpu_time_used);
+  for (int i = 0; i < n - 1; i++)
+  {
+    j++;
+    if (j == 2)
+    {
+      removed = send_to_box(&head, &tail, &caixa, N - i);
+      j = 0;
+    }
+    show(&removed, 1);
+    show(&head, i);
+    puts("\n");
+  }
+
   return 0;
 }
