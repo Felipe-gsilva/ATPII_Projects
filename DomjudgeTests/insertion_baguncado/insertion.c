@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void sort(long double arr[], int n)
-{
+void sort(double arr[], int n) {
   int i, j;
-  long double current;
-  for (i = 1; i < n; i++)
-  {
+  double current;
+  for (i = 1; i <= n; i++) {
     current = arr[i];
     j = i - 1;
-    while (j >= 0 && arr[j] > current)
-    {
+    while (j >= 0 && arr[j] > current) {
       arr[j + 1] = arr[j];
       j = j - 1;
     }
@@ -18,15 +15,13 @@ void sort(long double arr[], int n)
   }
 }
 
-void sort_rest(long double arr[], int n, int k)
-{
+void sort_rest(double arr[], int n, int k) {
   int i, j;
-  long double current;
-  for (i = 1 + k; i < n; i++)
-  {
+  double current;
+  for (i = k; i < n; i++) {
     current = arr[i];
-    while (j >= k && arr[j] < current)
-    {
+    j = i - 1;
+    while (j > k && arr[j] < current) {
       arr[j + 1] = arr[j];
       j = j - 1;
     }
@@ -34,24 +29,28 @@ void sort_rest(long double arr[], int n, int k)
   }
 }
 
-void print_arr(long double arr[], int n)
-{
+void print_arr(double arr[], int n) {
   for (int i = 0; i < n; i++)
-    printf("%.3Lf ", arr[i]);
+    printf("%.3lf ", arr[i]);
   puts("\n");
 }
 
-int main()
-{
+int main() {
   int n, k;
-  long double *arr;
+  double *arr;
   scanf("%d %d", &n, &k);
-  arr = calloc(n, sizeof(long double));
+  arr = malloc(n * sizeof(double));
   for (int i = 0; i < n; i++)
-    scanf("%Lf", &arr[i]);
+    scanf("%lf", &arr[i]);
 
-  sort(arr, k + 1);
-  sort_rest(arr, n, k);
+  if(k){
+    sort(arr, k);  
+    sort_rest(arr, n, k);
+  }
+  else
+  {
+    sort_rest(arr, n, -1);
+  }
   print_arr(arr, n);
   free(arr);
   return 0;
