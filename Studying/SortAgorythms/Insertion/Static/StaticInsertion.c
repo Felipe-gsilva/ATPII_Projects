@@ -4,17 +4,17 @@
 
 void insertion_sort(int arr[], int n)
 {
-  int i, key, j;
+  int i, current, j; 
   for (i = 1; i < n; i++)
   {
-    key = arr[i];
-    j = i - 1;
-    while (j >= 0 && arr[j] > key)
+    current = arr[i]; // this variable stores the value of the current element
+    j = i - 1; // this variable stores the index of the previous element
+    while (j >= 0 && arr[j] > current) // this loop moves the previous elements that are greater than the current element one position ahead of their current position
     {
-      arr[j + 1] = arr[j];
-      j = j - 1;
+      arr[j + 1] = arr[j]; // this moves the previous element one position ahead of its current position
+      j = j - 1; // this moves the index of the previous element one position ahead of its current position
     }
-    arr[j + 1] = key;
+    arr[j + 1] = current; // this is the correct position of the current element
   }
 }
 
