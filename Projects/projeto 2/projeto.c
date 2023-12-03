@@ -5,7 +5,7 @@
 int maxArr(int **arr, int N, int k, int n, int i, int j)
 {
   // declaração de variáveis
-  int count = 0, d = 0; 
+  int count = 0, d = 0;
   d = N - n + 1; // d recebe a diferença entre o tamanho da matriz e o tamanho da submatriz
   // verifica a submatriz de tamanho n dentro da matriz de tamanho N
   for (; i < d; i++) // i e j são os índices da posição inicial da submatriz
