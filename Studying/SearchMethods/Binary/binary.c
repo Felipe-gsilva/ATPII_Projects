@@ -42,6 +42,8 @@ int main(int argc, char const *argv[])
   int key = rand() % 10;
   printf("Key: %d\n", key);
   print_arr(arr, n);
+
+  
   binarysearch(arr, 0, n - 1, key);
 
   return 0;

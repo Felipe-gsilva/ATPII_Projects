@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
-#define MAX 1000000
+#define MAX 10
 
 void print_arr(int arr[], int size)
 {
@@ -61,8 +61,6 @@ void quicksort(int arr[], int low, int high)
 int main()
 {
   srand(time(NULL));
-  double start, end;
-  start = clock();
 
   int arr[MAX];
   for (int i = 0; i < MAX; i++)
@@ -74,8 +72,6 @@ int main()
   printf("Sorted array: \n");
   print_arr(arr, MAX);
 
-  end = clock();
-  printf("Time taken: %lf\n", (end - start) / CLOCKS_PER_SEC);
 
   return 0;
 }

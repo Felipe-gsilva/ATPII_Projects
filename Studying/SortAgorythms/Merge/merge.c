@@ -3,7 +3,6 @@
 #include <time.h>
 #define MAX 10
 
-
 void merge(int arr[], int low, int mid, int high)
 {
   int i, j, k;
@@ -44,10 +43,8 @@ void merge(int arr[], int low, int mid, int high)
   }
 }
 
-
 void mergesort(int arr[], int low, int high)
 {
-
   if (low < high)
   {
     int mid = (low + high) / 2;
@@ -57,15 +54,19 @@ void mergesort(int arr[], int low, int high)
   }
 }
 
-
 int main()
 {
   int arr[MAX];
-  for(int i = 0; i < MAX; i++)
+  for (int i = 0; i < MAX; i++)
     arr[i] = rand() % 100000;
+
+  printf("Unsorted array: \n");
+  for (int i = 0; i < MAX; i++)
+    printf("%d ", arr[i]);
+
   mergesort(arr, 0, MAX - 1);
-  printf("Sorted array: \n");
-  for(int i = 0; i < MAX; i++)
+  printf("\nSorted array: \n");
+  for (int i = 0; i < MAX; i++)
     printf("%d ", arr[i]);
   return 0;
 }
