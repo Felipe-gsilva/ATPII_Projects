@@ -1,0 +1,106 @@
+#arq2000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.006 seconds.
+  -Average time per iteration: 0.001 seconds.
+
+Double Pivot Quick Sort
+  -Total time measured: 0.049 seconds.
+  -Average time per iteration: 0.010 seconds.
+#arq2000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.002 seconds.
+  -Average time per iteration: 0.000 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.002 seconds.
+  -Average time per iteration: 0.000 seconds.
+  
+#arq20000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.169 seconds.
+  -Average time per iteration: 0.034 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.658 seconds.
+  -Average time per iteration: 0.132 seconds.
+
+	#arq20000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.032 seconds.
+  -Average time per iteration: 0.006 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.029 seconds.
+  -Average time per iteration: 0.006 seconds.
+
+	#arq40000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.488 seconds.
+  -Average time per iteration: 0.098 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 5.413 seconds.
+  -Average time per iteration: 1.083 seconds.
+
+	#arq40000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.073 seconds.
+  -Average time per iteration: 0.015 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.074 seconds.
+  -Average time per iteration: 0.015 seconds.
+
+	#arq80000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 1.967 seconds.
+  -Average time per iteration: 0.393 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 14.718 seconds.
+  -Average time per iteration: 2.944 seconds.
+
+	#arq80000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.166 seconds.
+  -Average time per iteration: 0.033 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.159 seconds.
+  -Average time per iteration: 0.032 seconds.
+
+	#arq160000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 5.196 seconds.
+  -Average time per iteration: 1.039 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 40.122 seconds.
+  -Average time per iteration: 8.024 seconds.
+
+	#arq160000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.391 seconds.
+  -Average time per iteration: 0.078 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.359 seconds.
+  -Average time per iteration: 0.072 seconds.
+
+	rep2000ord
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.003 seconds.
+  -Average time per iteration: 0.001 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.004 seconds.
+  -Average time per iteration: 0.001 seconds.
+
+	rep2000u
+##Single Pivot QuickSort (median of three):
+  -Total time measured: 0.002 seconds.
+  -Average time per iteration: 0.000 seconds.
+
+##Dual Pivot Quick Sort:
+  -Total time measured: 0.002 seconds.
+  -Average time per iteration: 0.000 seconds.
