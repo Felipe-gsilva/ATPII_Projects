@@ -27,9 +27,10 @@ int median3(int a, int b, int c)
   return c;
 }
 
-int partition(int arr[], int low, int high)
+int p(int arr[], int low, int high)
 {
   int pivot = median3(arr[low], arr[(low + high) / 2], arr[high]);
+
   if (pivot == arr[low])
     swap(&arr[low], &arr[high]);
   else if (pivot == arr[(low + high) / 2])
@@ -46,6 +47,23 @@ int partition(int arr[], int low, int high)
   }
   swap(&arr[i + 1], &arr[high]);
   return i + 1;
+}
+
+int partition(int arr[], int low, int high)
+{
+  int pivot = arr[high];
+
+  int i = low - 1;
+  for (int j = low; j < high; j++)
+  {
+    if (arr[j] <= pivot)
+    {
+      i++;
+      swap(&arr[i], &arr[j]);
+    }
+  }
+  swap(&arr[i + 1], &arr[high]);
+  return 1 + i;
 }
 
 void quicksort(int arr[], int low, int high)
@@ -71,7 +89,6 @@ int main()
   quicksort(arr, 0, MAX - 1);
   printf("Sorted array: \n");
   print_arr(arr, MAX);
-
 
   return 0;
 }

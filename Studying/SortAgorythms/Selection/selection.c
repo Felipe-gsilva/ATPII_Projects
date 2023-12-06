@@ -1,32 +1,63 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
-void selectionSort(int arr[], int n) {
-  int i, j, minIndex, temp;
-  
-  for (i = 0; i < n-1; i++) {
-    minIndex = i;
-    for (j = i+1; j < n; j++) {
-      if (arr[j] < arr[minIndex]) {
-        minIndex = j;
-      }
+void selection(int arr[], int length)
+{
+  int min_index, i = 0, j, aux;
+  for (; i < length - 1; i++)
+  {
+    min_index = i;
+    for (j = i + 1; j < length; j++)
+    {
+      if (arr[j] < arr[min_index])
+        min_index = j;
     }
-    temp = arr[minIndex];
-    arr[minIndex] = arr[i];
-    arr[i] = temp;
+    aux = arr[i];
+    arr[i] = arr[min_index];
+    arr[min_index] = aux;
   }
 }
 
-int main() {
-  int arr[] = {64, 25, 12, 22, 11};
-  int n = sizeof(arr)/sizeof(arr[0]);
-  
-  selectionSort(arr, n);
-  
+int main()
+{
+  clock_t start, end;
+  double cpu_time_used;
+  start = clock();
+  FILE *file;
+  char c;
+  int line_count = 0, *list;
+  file = fopen("input.txt", "r");
+  do
+  {
+    c = fgetc(file);
+    line_count++;
+  } while (c != EOF);
+
+  fseek(file, 0, SEEK_SET);
+  if (line_count == 1)
+  {
+    puts("Empty file");
+    exit(1);
+  }
+
+  list = malloc(line_count * sizeof(int));
+  for (int i = 0; i < line_count; i++)
+    fscanf(file, "%d", &list[i]);
+  selection(list, line_count);
+
   printf("Array ordenado: \n");
-  for (int i=0; i < n; i++) {
-    printf("%d ", arr[i]);
+  for (int i = 0; i < line_count; i++)
+  {
+    printf("%d ", list[i]);
   }
   printf("\n");
-  
+
+  fclose(file);
+  free(list);
+
+  end = clock();
+  cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+  printf("Time: %lf\n", cpu_time_used);
   return 0;
 }
