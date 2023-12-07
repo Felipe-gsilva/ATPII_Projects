@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void shellSort(int aux[], int n)
+void shellSort(int arr[], int n)
 {
   int k = 1, current, j;
 
@@ -11,14 +11,14 @@ void shellSort(int aux[], int n)
   {
     for (int i = k; i < n; i++)
     {
-      current = aux[i];
+      current = arr[i];
       j = i;
-      while (j >= k && aux[j - k] > current)
+      while (j >= k && arr[j - k] > current)
       {
-        aux[j] = aux[j - k];
+        arr[j] = arr[j - k];
         j -= k;
       }
-      aux[j] = current;
+      arr[j] = current;
     }
     k = (k - 1) / 3;
   }

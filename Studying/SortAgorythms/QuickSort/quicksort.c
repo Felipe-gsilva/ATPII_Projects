@@ -15,7 +15,6 @@ void swap(int *a, int *b)
   int temp = *a;
   *a = *b;
   *b = temp;
-  return;
 }
 
 int median3(int a, int b, int c)
@@ -52,7 +51,6 @@ int p(int arr[], int low, int high)
 int partition(int arr[], int low, int high)
 {
   int pivot = arr[high];
-
   int i = low - 1;
   for (int j = low; j < high; j++)
   {

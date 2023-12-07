@@ -26,7 +26,7 @@ void merge(int arr[], int low, int mid, int high)
     {
       arr[k++] = L[i++]; // copia o elemento da parte esquerda para o array original
     }
-    else // se o elemento da parte direita for menor ou igual ao da parte esquerda
+    else // se o elemento da parte direita for menor ao da parte esquerda
     {
       arr[k++] = R[j++]; // copia o elemento da parte direita para o array original
     }
