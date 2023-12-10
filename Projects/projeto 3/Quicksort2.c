@@ -78,21 +78,21 @@ void DualPivotQuickSort(char *arr[], int low, int high)
   }
 }
 
-int main()
+int main(int argc, char *argv[])
 {
   struct timespec begin, end;
   long seconds, nanoseconds;
   double elapsed;
   srand(time(NULL));
-  FILE *stdin, *output;
-  stdin = fopen("arquivo.input", "r");
+  FILE *stdinput, *output;
+  stdinput = fopen(argv[1], "r");
   int line = 1;
   char c;
 
   // conta o número de linhas do arquivo
   do
   {
-    c = fgetc(stdin);
+    c = fgetc(stdinput);
     if (c == '\n')
       line++;
   } while (c != EOF);
@@ -108,15 +108,15 @@ int main()
   char **arr;
   arr = malloc(line * sizeof(char *));
   for (int i = 0; i < line; i++)
-    arr[i] = malloc(100 * sizeof(char));
+    arr[i] = malloc(36 * sizeof(char));
 
   // inicia a repetição para contagem do tempo
   for (int i = 0; i < 5; i++)
   {
     // reseta o ponteiro do arquivo
-    fseek(stdin, 0, SEEK_SET); 
+    fseek(stdinput, 0, SEEK_SET); 
     for (int i = 0; i < line; i++)
-      fscanf(stdin, "%s", arr[i]);
+      fscanf(stdinput, "%s", arr[i]);
 
     // anota o tempo de inıcio em begin
     clock_gettime(CLOCK_REALTIME, &begin);
@@ -131,7 +131,7 @@ int main()
     elapsed += seconds + nanoseconds * 1e-9;
   }
   // fecha o arquivo
-  fclose(stdin);
+  fclose(stdinput);
   printf("Array after sorting: ");
   print_arr(arr, line);
   printf("Total time measured: %.3f seconds.\n", elapsed);

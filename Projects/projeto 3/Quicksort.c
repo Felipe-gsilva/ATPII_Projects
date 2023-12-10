@@ -20,7 +20,7 @@ void print_arr(char **arr, int n)
 }
 
 // função de mediana de três
-char *median_of_three(char *a, char *b, char *c) 
+char *median_of_three(char *a, char *b, char *c)
 {
   if ((strcmp(a, b) > 0 && strcmp(a, c) < 0) || (strcmp(a, b) < 0 && strcmp(a, c) > 0))
     return a;
@@ -61,7 +61,7 @@ void quickSort(char *arr[], int low, int high)
   {
     // Realiza a partição
     int pi = partition(arr, low, high);
-    
+
     // Ordena os elementos antes e depois da partição
     quickSort(arr, low, pi - 1);
     quickSort(arr, pi + 1, high);
@@ -69,21 +69,22 @@ void quickSort(char *arr[], int low, int high)
 }
 
 // Função principal
-int main()
+int main(int argc, char *argv[])
 {
   struct timespec begin, end;
   long seconds, nanoseconds;
   double elapsed;
   srand(time(NULL));
-  FILE *stdin, *output;
-  stdin = fopen("arquivo.input", "r");
   int line = 1;
   char c;
+  FILE *stdinput, *output;
+
+  stdinput = fopen(argv[1], "r");
 
   // conta o número de linhas do arquivo
   do
   {
-    c = fgetc(stdin);
+    c = fgetc(stdinput);
     if (c == '\n')
       line++;
   } while (c != EOF);
@@ -96,14 +97,14 @@ int main()
   char **arr;
   arr = malloc(line * sizeof(char *));
   for (int i = 0; i < line; i++)
-    arr[i] = malloc(100 * sizeof(char));
+    arr[i] = malloc(36 * sizeof(char));
 
   //
   for (int i = 0; i < 5; i++)
   {
-    fseek(stdin, 0, SEEK_SET); // reseta o ponteiro do arquivo
+    fseek(stdinput, 0, SEEK_SET); // reseta o ponteiro do arquivo
     for (int i = 0; i < line; i++)
-      fscanf(stdin, "%s", arr[i]);
+      fscanf(stdinput, "%s", arr[i]);
 
     // inicio do clock
     clock_gettime(CLOCK_REALTIME, &begin);
@@ -118,7 +119,7 @@ int main()
     elapsed += seconds + nanoseconds * 1e-9;
   }
 
-  fclose(stdin);
+  fclose(stdinput);
   printf("Array after sorting: ");
   print_arr(arr, line);
   printf("Total time measured: %.3f seconds.\n", elapsed);

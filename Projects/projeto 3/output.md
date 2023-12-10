@@ -1,3 +1,6 @@
+É possivel perceber que durante a execução dos testes, o sort com um pivô aliado a mediana de três garantiu um resultado semelhante se não melhor do que o com dois pivôs escolhidos entre o final e começo do vetor.
+É perceptível, também, que o caso de O(n^2) fica evidente com os arquivos ordenados em comparação ao melhor caso de O(n*log(n)), visto que a velocidade de execução diminui absurdamente.
+
 # arq2000ord
 ### Single Pivot QuickSort (median of three):
   Total time measured: 0.006 seconds.
