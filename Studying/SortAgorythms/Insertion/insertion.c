@@ -4,25 +4,24 @@
 
 void insertion_sort(int arr[], int n)
 {
-  int i, current, j; 
+  int i, current, j;
   for (i = 1; i < n; i++)
   {
-    current = arr[i]; // this variable stores the value of the current element
-    j = i - 1; // this variable stores the index of the previous element
-    while (j >= 0 && arr[j] > current) // this loop moves the previous elements that are greater than the current element one position ahead of their current position
+    current = arr[i];
+    j = i - 1;
+    while (j >= 0 && arr[j] > current)
     {
-      arr[j + 1] = arr[j]; // this moves the previous element one position ahead of its current position
-      j = j - 1; // this moves the index of the previous element one position ahead of its current position
+      arr[j + 1] = arr[j];
+      j--;
     }
-    arr[j + 1] = current; // this is the correct position of the current element
+    arr[j + 1] = current;
   }
 }
 
 void print_arr(int *arr, int n)
 {
   for (int i = 0; i < n; i++)
-    printf("%d ", *(arr + i));
-  puts("\n");
+    printf("%d\n", *(arr + i));
 }
 
 int main(void)
@@ -30,15 +29,31 @@ int main(void)
   clock_t start, end;
   double cpu_time_used;
   start = clock();
+  FILE *file;
+  char c;
+  int line_count = 0, *list;
+  file = fopen("input.txt", "r");
+  do
+  {
+    c = fgetc(file);
+    line_count++;
+  } while (c != EOF);
 
-  srand(time(NULL));
-  int *list, N;
-  scanf("%d", &N);
-  list = calloc(N, sizeof(int));
-  for (int i = 0; i < N; i++)
-    *(list + i) = rand() % 100000;
-  insertion_sort(list, N);
-  print_arr(list, N);
+  fseek(file, 0, SEEK_SET);
+  if (line_count == 1)
+  {
+    puts("Empty file");
+    exit(1);
+  }
+
+  list = malloc(line_count * sizeof(int));
+  for (int i = 0; i < line_count; i++)
+    fscanf(file, "%d", &list[i]);
+
+  insertion_sort(list, line_count);
+  print_arr(list, line_count);
+
+  fclose(file);
   free(list);
 
   end = clock();
